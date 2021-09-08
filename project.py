@@ -24,12 +24,13 @@ myColorValues = [[0, 0, 255],  # 红色
                  [255, 0, 0],  # 蓝色
                  [0, 255, 0]]  # 绿色
 
-myPoints = []  ## [x , y , colorId ]
+myPoints = []  # [x , y , colorId ]
 
 
 def findColor(img, myColors, myColorValues):  # 查找颜色函数
     imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)  # chapter2
     count = 0  # 计数器来计算实际计数多少次
+
     newPoints = []
     for color in myColors:
         lower = np.array(color[0:3])  # chapter2 这里改为取前三个值
@@ -48,12 +49,13 @@ def findColor(img, myColors, myColorValues):  # 查找颜色函数
 
 
 def getContours(img):  # chapter8
-    contours, hierarchy = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)  # chapter8
+    contours, hierarchy = cv2.findContours(
+        img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)  # chapter8
     x, y, w, h = 0, 0, 0, 0
     for cnt in contours:
         area = cv2.contourArea(cnt)
         if area > 500:
-            #、 cv2.drawContours(imgResult, cnt, -1, (255, 0, 0), 3)
+            # 、 cv2.drawContours(imgResult, cnt, -1, (255, 0, 0), 3)
             peri = cv2.arcLength(cnt, True)
             approx = cv2.approxPolyDP(cnt, 0.02 * peri, True)  # chapter8
             x, y, w, h = cv2.boundingRect(approx)  # chapter8
@@ -63,7 +65,8 @@ def getContours(img):  # chapter8
 def drawOnCanvas(myPoints, myColorValues):
     for point in myPoints:
         # 重复画圆，达到绘制成路径的效果
-        cv2.circle(imgResult, (point[0], point[1]), 8, myColorValues[point[2]], cv2.FILLED)
+        cv2.circle(imgResult, (point[0], point[1]),
+                   8, myColorValues[point[2]], cv2.FILLED)
 
 
 while True:
