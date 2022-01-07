@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 #学习将图片灰度、模糊、边缘检测、扩张、侵蚀处理
 
-img = cv2.imread("picture/YuZhangWang.png")
+img = cv2.imread("picture/lena.png")
 kernel = np.ones((5,5),np.uint8)
 
 imgGray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
